@@ -1,0 +1,67 @@
+package se.lexicon;
+
+import java.util.Scanner;
+
+public class ConsoleUI {
+    IVendingMachine vendingMachine;
+    Scanner scanner = new Scanner(System.in);
+
+    public ConsoleUI(IVendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
+    }
+
+    public void start() {
+        // Implementation of the console UI interaction goes here
+        while (true){
+            System.out.println("Welcome to the Vending Machine!");
+            System.out.println("1. show product");
+            System.out.println("2. Insert Coin");
+            System.out.println("3. Purchase Product");
+            System.out.println("4. Return Change");
+            System.out.println("5. Exit");
+            System.out.println("Please select an option:");
+            // Further implementation would handle user input and interact with vendingMachine
+            int option = scanner.nextInt();
+
+            switch (option){
+                case 1: showProducts();
+                    break;
+                case 2: insertCoin();
+                    break;
+                case 3: purchaseProduct();
+                break;
+                case 4: returnChange();
+                break;
+
+                case 5: System.out.println("Exiting... Goodbye!");
+                    System.exit(0);
+            }
+        }
+    }
+
+    private void showProducts() {
+        for (Product p: vendingMachine.getProducts()){
+            System.out.println("ID: " + p.getId() + p.getDescription());
+        }
+    }
+
+    private void returnChange() {
+        int change = vendingMachine.returnChange();
+        System.out.println("Returned change: " + change + " kr");
+    }
+
+    private void purchaseProduct() {
+        System.out.println("Please enter product ID to purchase:");
+        int productId = scanner.nextInt();
+        Product product = vendingMachine.purchaseProduct(productId);
+        System.out.println("You have purchased: " + product.getName());
+    }
+
+    private void insertCoin() {
+        System.out.println("Please enter coin value to insert:");
+        int coin = scanner.nextInt();
+        vendingMachine.insertCoin(coin);
+        System.out.println("Current balance: " + vendingMachine.getBalance() + " kr");
+
+    }
+}
