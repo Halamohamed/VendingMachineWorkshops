@@ -28,6 +28,11 @@ public abstract class Product {
     public int getQuantity() {
         return quantity;
     }
+    public void reduceQuantity() {
+        if (quantity > 0) {
+            quantity--;
+        }
+    }
 
     String getDescription() {
         return "Product ID: " + id + ", Name: " + name + ", Price: " + price + ", Quantity: " + quantity;

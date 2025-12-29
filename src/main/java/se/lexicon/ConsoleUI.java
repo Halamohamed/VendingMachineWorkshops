@@ -12,7 +12,7 @@ public class ConsoleUI {
 
     public void start() {
         // Implementation of the console UI interaction goes here
-        while (true){
+        while (true) {
             System.out.println("Welcome to the Vending Machine!");
             System.out.println("1. show product");
             System.out.println("2. Insert Coin");
@@ -23,24 +23,29 @@ public class ConsoleUI {
             // Further implementation would handle user input and interact with vendingMachine
             int option = scanner.nextInt();
 
-            switch (option){
-                case 1: showProducts();
+            switch (option) {
+                case 1:
+                    showProducts();
                     break;
-                case 2: insertCoin();
+                case 2:
+                    insertCoin();
                     break;
-                case 3: purchaseProduct();
-                break;
-                case 4: returnChange();
-                break;
+                case 3:
+                    purchaseProduct();
+                    break;
+                case 4:
+                    returnChange();
+                    break;
 
-                case 5: System.out.println("Exiting... Goodbye!");
+                case 5:
+                    System.out.println("Exiting... Goodbye!");
                     System.exit(0);
             }
         }
     }
 
     private void showProducts() {
-        for (Product p: vendingMachine.getProducts()){
+        for (Product p : vendingMachine.getProducts()) {
             System.out.println("ID: " + p.getId() + p.getDescription());
         }
     }
@@ -58,7 +63,7 @@ public class ConsoleUI {
     }
 
     private void insertCoin() {
-        System.out.println("Please enter coin value to insert:");
+        System.out.println("Please enter coin value(1, 2, 5, 10, 20, 50) to insert:");
         int coin = scanner.nextInt();
         vendingMachine.insertCoin(coin);
         System.out.println("Current balance: " + vendingMachine.getBalance() + " kr");
