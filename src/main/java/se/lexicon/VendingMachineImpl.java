@@ -2,10 +2,18 @@ package se.lexicon;
 
 import java.util.*;
 
+/**
+ * VendingMachineImpl class implements the IVendingMachine interface.
+ * It provides functionalities to insert coins, purchase products,
+ * return change, and get the list of available products.
+ */
 public class VendingMachineImpl implements IVendingMachine{
 
+    // Current balance in the vending machine
     private int balance;
+    //  Available products in the vending machine
     private Map<Integer,Product> products;
+    // Accepted coin denominations
     Set<Integer> COINS; // coin values in kr
 
     public VendingMachineImpl() {
@@ -31,18 +39,25 @@ public class VendingMachineImpl implements IVendingMachine{
     }
 
     @Override
-    public Product purchaseProduct(int productId) {
+    public Product purchaseProduct(int productId)  {
         Product product = products.get(productId);
         if (product == null) {
-            throw new IllegalArgumentException("Product with ID " + productId + " does not exist.");
-        }
-        if (product.getPrice() > balance) {
-            throw new IllegalArgumentException("You have not balance to purchase this product.");
-        }
-        balance -= product.getPrice();
-        product.reduceQuantity();
+            System.out.println("Product with ID " + productId + " does not exist.");
 
-        return product;
+        }
+        else if (product.getPrice() > balance) {
+            System.out.println("You have not balance to purchase this product.");
+        }
+        else if( product.getQuantity() <= 0) {
+            System.out.println("Product is out of stock.");
+        }else{
+            balance -= product.getPrice();
+            product.reduceQuantity();
+            return product;
+        }
+
+
+        return null;
     }
 
     @Override
