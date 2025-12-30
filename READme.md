@@ -93,6 +93,10 @@ The implementation must:
         - name: String
         - price: int
         - quantity: int
+        + getId(): int
+        + getName(): String
+        + getPrice(): int
+        + getQuantity(): int
         + getDescription(): String
     }
 
@@ -100,7 +104,15 @@ The implementation must:
     class Beverage
     class Fruit
 
-    class VendingMachineImpl
+    class VendingMachineImpl {
+        - balance: int
+        - products: List~Product~
+        + insertCoin(coin: int): void
+        + getBalance(): int
+        + purchaseProduct(productId: int): Product
+        + returnChange(): int
+        + getProducts(): List~Product~
+    }
     class ConsoleUI
 
     Product <|-- Snack

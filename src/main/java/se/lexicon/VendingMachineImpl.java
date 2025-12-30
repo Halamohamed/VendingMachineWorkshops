@@ -28,7 +28,7 @@ public class VendingMachineImpl implements IVendingMachine{
         if ( COINS.contains(coin)){
             balance += coin;
         } else {
-            throw new IllegalArgumentException("Invalid coin inserted: " + coin);
+            System.out.println("Invalid coin inserted: " + coin);
         }
 
     }

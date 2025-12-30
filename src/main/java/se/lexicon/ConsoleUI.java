@@ -2,11 +2,15 @@ package se.lexicon;
 
 import java.util.Scanner;
 
+/**
+ * Console-based User Interface for the Vending Machine.
+ */
 public class ConsoleUI {
     IVendingMachine vendingMachine;
     Scanner scanner = new Scanner(System.in);
 
     public ConsoleUI(IVendingMachine vendingMachine) {
+
         this.vendingMachine = vendingMachine;
     }
 
@@ -38,7 +42,7 @@ public class ConsoleUI {
                     break;
 
                 case 5:
-                    System.out.println("Exiting... Goodbye!");
+                    System.out.println("Exiting... Vending Machine!");
                     System.exit(0);
             }
         }
@@ -46,7 +50,7 @@ public class ConsoleUI {
 
     private void showProducts() {
         for (Product p : vendingMachine.getProducts()) {
-            System.out.println("ID: " + p.getId() + p.getDescription());
+            System.out.println("ID: " + p.getId() + " " + p.getDescription()+ " Quantity: " + (p.getQuantity() > 0 ? p.getQuantity() : "Out of Stock"));
         }
     }
 
@@ -59,7 +63,9 @@ public class ConsoleUI {
         System.out.println("Please enter product ID to purchase:");
         int productId = scanner.nextInt();
         Product product = vendingMachine.purchaseProduct(productId);
-        System.out.println("You have purchased: " + product.getName());
+        if (product != null)
+        System.out.println("You have purchased: " + product.getDescription());
+        else System.out.println("Purchase failed.");
     }
 
     private void insertCoin() {

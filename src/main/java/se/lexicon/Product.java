@@ -1,5 +1,8 @@
 package se.lexicon;
 
+/**
+ * Represents a generic product in the inventory system.
+ */
 public abstract class Product {
     private int id;
     private String name;
