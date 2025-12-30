@@ -4,10 +4,12 @@ import junit.framework.TestCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for VendingMachineImpl class.
@@ -93,5 +95,17 @@ public class VendingMachineImplTest {
         vendingMachine.addProduct(newProduct);
         assertEquals(2, vendingMachine.getProducts().size());
         assertTrue(vendingMachine.getProducts().contains(newProduct));
+    }
+
+    @Test
+    public void testGetProductsReturnItems() {
+        vendingMachine.addProduct(new Fruit(3, "Apple", 8, 10));
+        vendingMachine.addProduct(new Snack(4, "Chips", 10, 5));
+        assertEquals(3, vendingMachine.getProducts().size());
+         Product[] products = new Product[]{
+                vendingMachine.getProducts().get(0),
+                vendingMachine.getProducts().get(1),
+                vendingMachine.getProducts().get(2)};
+        assertArrayEquals(products, vendingMachine.getProducts().toArray());
     }
 }
