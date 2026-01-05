@@ -7,30 +7,38 @@ import java.util.*;
  * It provides functionalities to insert coins, purchase products,
  * return change, and get the list of available products.
  */
-public class VendingMachineImpl implements IVendingMachine{
+public class VendingMachineImpl implements IVendingMachine {
 
     // Current balance in the vending machine
     private int balance;
     //  Available products in the vending machine
-    private Map<Integer,Product> products;
+    private Map<Integer, Product> products;
     // Accepted coin denominations
-    Set<Integer> COINS; // coin values in kr
+    private Coin COINS; // coin values in kr
 
+    /**
+     * Constructor to initialize the vending machine with an empty product list and zero balance.
+     */
     public VendingMachineImpl() {
         this.balance = 0;
         this.products = new HashMap<>();
-        this.COINS = Set.of(1,2,5,10,20,50);
+        //this.COINS = Set.of(1, 2, 5, 10, 20, 50);
     }
 
     @Override
     public void insertCoin(int coin) {
 
-        if ( COINS.contains(coin)){
+        for (Coin c : Coin.values()) {
+            if (c.getValue() == coin) {
+                COINS = c;
+                break;
+            }
+        }
+        if (COINS.getValue() == coin) {
             balance += coin;
         } else {
             System.out.println("Invalid coin inserted: " + coin);
         }
-
     }
 
     @Override
@@ -39,24 +47,20 @@ public class VendingMachineImpl implements IVendingMachine{
     }
 
     @Override
-    public Product purchaseProduct(int productId)  {
+    public Product purchaseProduct(int productId) {
         Product product = products.get(productId);
         if (product == null) {
             System.out.println("Product with ID " + productId + " does not exist.");
 
-        }
-        else if (product.getPrice() > balance) {
+        } else if (product.getPrice() > balance) {
             System.out.println("You have not balance to purchase this product.");
-        }
-        else if( product.getQuantity() <= 0) {
+        } else if (product.getQuantity() <= 0) {
             System.out.println("Product is out of stock.");
-        }else{
+        } else {
             balance -= product.getPrice();
             product.reduceQuantity();
             return product;
         }
-
-
         return null;
     }
 

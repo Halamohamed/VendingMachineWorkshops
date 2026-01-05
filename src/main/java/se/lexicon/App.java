@@ -8,6 +8,7 @@ public class App
 {
     public static void main( String[] args )
     {
+        // Initialize vending machine with some products
         VendingMachineImpl vendingMachine = new VendingMachineImpl();
         vendingMachine.addProduct(new Snack(1, "Chips", 15, 10));
         vendingMachine.addProduct(new Beverage(2, "Soda", 10, 20));
@@ -16,6 +17,7 @@ public class App
         vendingMachine.addProduct(new Beverage(5, "Juice", 12, 15));
         vendingMachine.addProduct(new Fruit(6, "Apple", 8, 25));
         vendingMachine.addProduct(new Fruit(7, "Banana", 6, 30));
+        // Start the console UI
         ConsoleUI consoleUI = new ConsoleUI(vendingMachine);
         consoleUI.start();
 
